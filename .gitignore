@@ -11,8 +11,16 @@ obj/
 # Ignore Visual Studio Code settings
 .vscode/
 
+<<<<<<< HEAD
 # Ignore Mac OS junk
 .DS_Store
 
 # Ignore system files
 Thumbs.db
+=======
+# Ignore Mac OS junk (if ever used)
+.DS_Store
+
+# Ignore system files
+Thumbs.db
+>>>>>>> ef002c43d98358c0003a09e2d6b4f8d64e563f04
