@@ -100,6 +100,8 @@ namespace CPUScheduling
             {
                 Console.WriteLine($"{p.Id,-5}\t{p.ArrivalTime,-7}\t{p.BurstTime,-5}\t{p.CompletionTime,-10}\t{p.TurnaroundTime,-10}\t{p.WaitingTime,-7}\t{p.ResponseTime,-8}");
             }
+            Console.WriteLine("\nGantt Chart:");
+            PrintGanttChart(updatedProcesses);
         }
 
         static List<Process> CloneProcesses(List<Process> originalProcesses)
@@ -300,5 +302,41 @@ namespace CPUScheduling
                 AverageResponseTime = totalResponseTime / n
             }, processes);
         }
+
+        static void PrintGanttChart(List<Process> processes)
+{
+    var executionOrder = processes.OrderBy(p => p.CompletionTime - p.BurstTime).ToList();
+
+    
+    foreach (var p in executionOrder)
+    {
+        Console.Write("-------");
+    }
+    Console.WriteLine();
+
+    
+    foreach (var p in executionOrder)
+    {
+        Console.Write($"| P{p.Id}  ");
+    }
+    Console.WriteLine("|");
+
+    
+    foreach (var p in executionOrder)
+    {
+        Console.Write("-------");
+    }
+    Console.WriteLine();
+
+    
+    int time = executionOrder.First().CompletionTime - executionOrder.First().BurstTime;
+    Console.Write($"{time, -3}");
+    foreach (var p in executionOrder)
+    {
+        time += p.BurstTime;
+        Console.Write($"{time,6}");
+    }
+    Console.WriteLine();
+    }
     }
 }
